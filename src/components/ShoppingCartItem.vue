@@ -43,7 +43,7 @@ export default {
       } else {
         store.commit("updateItemQuantity", {
           id: this.id,
-          quantity: newQuantity
+          quantity: parseInt(newQuantity)
         });
       }
     }

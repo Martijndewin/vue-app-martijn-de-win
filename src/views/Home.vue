@@ -8,6 +8,11 @@
       :slug="product.slug"
       :products="product.products"
     />
+    <v-pagination
+      v-model="pagination.page"
+      :length="Math.ceil(pagination.total / pagination.perPage)"
+      @input="handlePageChange"
+    ></v-pagination>
   </div>
 </template>
 
@@ -18,10 +23,20 @@ import store from "../store";
 import ProductBrandCardVue from "@/components/ProductBrandCard.vue";
 
 const baseUrl = "http://localhost:3000/products";
+
 export default {
   name: "Home",
   components: {
     ProductBrandCardVue
+  },
+  data() {
+    return {
+      pagination: {
+        page: 1,
+        total: 0,
+        perPage: 5
+      }
+    };
   },
   computed: {
     products() {
@@ -30,11 +45,29 @@ export default {
   },
   async created() {
     try {
-      // get all products
-      const res = await axios.get(baseUrl);
+      const res = await axios.get(baseUrl, {
+        params: {
+          _limit: this.pagination.perPage,
+          _page: this.pagination.page
+        }
+      });
+      // total count products:
+      this.pagination.total = res.headers["x-total-count"];
+
       store.commit("updateProducts", res.data);
     } catch (er) {
       console.log(er);
+    }
+  },
+  methods: {
+    async handlePageChange() {
+      const res = await axios.get(baseUrl, {
+        params: {
+          _limit: this.pagination.perPage,
+          _page: this.pagination.page
+        }
+      });
+      this.$store.commit("updateProducts", res.data);
     }
   }
 };

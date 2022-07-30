@@ -26,6 +26,15 @@ export default new Vuex.Store({
         product.quantity++;
         state.shoppingCartItems[productIndex] = product;
       }
+    },
+    removeItemFromCart(state, productId) {
+      // find product in cart and remove from array
+      state.shoppingCartItems.splice(
+        state.shoppingCartItems.findIndex(
+          cartItem => cartItem.id === productId
+        ),
+        1
+      );
     }
   },
   actions: {},

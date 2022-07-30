@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="shoppingCartItem mb-6">
     <v-card>
       <v-app-bar flat>
         <v-toolbar-title>
@@ -27,5 +27,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Products</h1>
+    <h1 class="pl-3">Products</h1>
     <ProductBrandCardVue
       v-for="product in products"
       :key="product.slug"

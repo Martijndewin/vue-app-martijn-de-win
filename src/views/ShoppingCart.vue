@@ -1,16 +1,26 @@
 <template>
   <div class="shoppingCart">
     <h1>This is the shopping cart</h1>
-    <ShoppingCartItem
-      v-for="shoppingCartItem in shoppingCartItems"
-      :key="shoppingCartItem.id"
-      :id="shoppingCartItem.id"
-      :price="shoppingCartItem.price"
-      :value="shoppingCartItem.value"
-      :quantity="shoppingCartItem.quantity"
-    />
-    <div class="pa-6 float-right">
-      <p v-if="shoppingCartItems.length">total: €{{ shoppingCartTotal }}</p>
+    <div v-if="shoppingCartItems.length">
+      <ShoppingCartItem
+        v-for="shoppingCartItem in shoppingCartItems"
+        :key="shoppingCartItem.id"
+        :id="shoppingCartItem.id"
+        :price="shoppingCartItem.price"
+        :value="shoppingCartItem.value"
+        :quantity="shoppingCartItem.quantity"
+      />
+      <div class="pa-6 float-right">
+        <p>total: €{{ shoppingCartTotal }}</p>
+      </div>
+    </div>
+    <div v-else>
+      <!-- if cart is empty -->
+      <p>Your shopping cart is empty!</p>
+      <p>
+        Go to <router-link to="/">the Product page</router-link> and add stuff
+        :)
+      </p>
     </div>
   </div>
 </template>

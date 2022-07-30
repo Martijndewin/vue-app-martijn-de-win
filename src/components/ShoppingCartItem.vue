@@ -36,6 +36,7 @@ export default {
       store.commit("removeItemFromCart", id);
     },
     updateItemQuantity(newQuantity) {
+      // TODO: Should update when quantity of item is changed in the cart
       // remove item when set to lower than 1
       if (newQuantity < 1) {
         this.removeFromCart(this.id);

@@ -1,6 +1,12 @@
 <template>
   <div class="home">
     <h1 class="pl-3">Products</h1>
+    <v-text-field
+      placeholder="Search for a product"
+      v-model="productSearchString"
+      @input="searchProducts(productSearchString)"
+      class="product-search mx-4"
+    />
     <ProductBrandCardVue
       v-for="product in products"
       :key="product.slug"
@@ -31,6 +37,7 @@ export default {
   },
   data() {
     return {
+      productSearchString: "",
       pagination: {
         page: 1,
         total: 0,
@@ -68,6 +75,25 @@ export default {
         }
       });
       this.$store.commit("updateProducts", res.data);
+    },
+    async searchProducts(productSearchString) {
+      try {
+        const res = await axios.get(
+          `${baseUrl}?name_like=${productSearchString}`,
+          {
+            params: {
+              _limit: this.pagination.perPage,
+              _page: this.pagination.page
+            }
+          }
+        );
+        // total count products:
+        this.pagination.total = res.headers["x-total-count"];
+
+        store.commit("updateProducts", res.data);
+      } catch (er) {
+        console.log(er);
+      }
     }
   }
 };

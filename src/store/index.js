@@ -34,6 +34,12 @@ export default new Vuex.Store({
         ),
         1
       );
+    },
+    updateItemQuantity(state, { id, quantity }) {
+      const productIndex = state.shoppingCartItems.findIndex(
+        itemInShoppingCart => itemInShoppingCart.id === id
+      );
+      state.shoppingCartItems[productIndex].quantity = quantity;
     }
   },
   actions: {},

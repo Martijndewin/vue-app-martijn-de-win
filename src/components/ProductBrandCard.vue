@@ -15,11 +15,12 @@
 </template>
 
 <script>
+import store from "../store";
 export default {
   props: ["name", "slug", "products"],
   methods: {
-    addToCard(product) {
-      console.log(product);
+    addToCard(e) {
+      store.commit("addToShoppingCart", e);
     }
   }
 };

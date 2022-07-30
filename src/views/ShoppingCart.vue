@@ -9,6 +9,9 @@
       :value="shoppingCartItem.value"
       :quantity="shoppingCartItem.quantity"
     />
+    <div class="pa-6 float-right">
+      <p v-if="shoppingCartItems.length">total: €{{ shoppingCartTotal }}</p>
+    </div>
   </div>
 </template>
 <script>
@@ -25,6 +28,14 @@ export default {
   computed: {
     shoppingCartItems() {
       return store.state.shoppingCartItems;
+    },
+    shoppingCartTotal() {
+      let subtotal = 0;
+      store.state.shoppingCartItems.forEach(item => {
+        subtotal += item.price * item.quantity;
+      });
+      // round to 2 decimals
+      return subtotal.toFixed(2);
     }
   }
 };

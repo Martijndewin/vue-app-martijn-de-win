@@ -2,7 +2,7 @@
   <div class="shoppingCart">
     <h1>This is the shopping cart</h1>
     <ShoppingCartItem
-      v-for="shoppingCartItem in shoppintCartItems"
+      v-for="shoppingCartItem in shoppingCartItems"
       :key="shoppingCartItem.id"
       :id="shoppingCartItem.id"
       :price="shoppingCartItem.price"
@@ -23,7 +23,7 @@ export default {
     ShoppingCartItem
   },
   computed: {
-    shoppintCartItems() {
+    shoppingCartItems() {
       return store.state.shoppingCartItems;
     }
   }

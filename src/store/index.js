@@ -23,8 +23,7 @@ export default new Vuex.Store({
         state.shoppingCartItems.push(product);
       } else {
         // if product is in shopping cart, add 1 to quantity.
-        product.quantity++;
-        state.shoppingCartItems[productIndex] = product;
+        state.shoppingCartItems[productIndex].quantity++;
       }
     },
     removeItemFromCart(state, productId) {
